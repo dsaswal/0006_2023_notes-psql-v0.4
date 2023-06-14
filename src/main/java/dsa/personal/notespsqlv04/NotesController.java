@@ -12,8 +12,14 @@ public class NotesController {
 
     @PostMapping
     public void addNote(Notes note) {
-        notesService.addTopic(note);
+        notesService.addNote(note);
         return;
     }
-    
+
+    @GetMapping("/notes")
+    public List<Notes> getNotes() {
+        return notesService.getAllNotes();
+        return;
+    }
+
 }

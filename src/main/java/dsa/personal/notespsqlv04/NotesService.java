@@ -18,7 +18,7 @@ public class NotesService {
         return allNotes;
     }
 
-    public void addTopic(Notes note) {
+    public void addNote(Notes note) {
         notesRepository.save(note);
     }
 
