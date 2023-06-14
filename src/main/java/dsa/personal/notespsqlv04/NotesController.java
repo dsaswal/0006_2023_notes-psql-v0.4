@@ -3,6 +3,7 @@ package dsa.personal.notespsqlv04;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +19,7 @@ public class NotesController {
     private NotesService notesService;
     
     @PostMapping("/notes")
-    public void addNote(Notes note) {
+    public void addNote(@RequestBody Notes note) {
         notesService.addNote(note);
         return;
     }
