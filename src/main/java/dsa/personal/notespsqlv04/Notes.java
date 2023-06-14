@@ -2,6 +2,8 @@ package dsa.personal.notespsqlv04;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Version;
+import java.sql.Timestamp;
 
 @Entity
 public class Notes {
@@ -10,9 +12,14 @@ public class Notes {
     private long id;
 	private String title;
 	private String note;
-	private long timestamp;
+	private Timestamp timestamp;
+	@Version
+	private int version;
+
+	public Notes() {
+	}
 	
-	public Notes(long id, String title, String note, long timestamp) {
+	public Notes(long id, String title, String note, Timestamp timestamp) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -44,11 +51,11 @@ public class Notes {
 		this.note = note;
 	}
 
-	public long getTimestamp() {
+	public Timestamp getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(long timestamp) {
+	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
 	}
 
