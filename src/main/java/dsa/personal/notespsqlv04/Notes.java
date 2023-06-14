@@ -1,6 +1,7 @@
 package dsa.personal.notespsqlv04;
 
-import 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
 public class Notes {

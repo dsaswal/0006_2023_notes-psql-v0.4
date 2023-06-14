@@ -1,5 +1,7 @@
 package dsa.personal.notespsqlv04;
 
-public interface NotesRepository extends CrudRepository<Notes, long> {
+import org.springframework.data.repository.CrudRepository;
+
+public interface NotesRepository extends CrudRepository<Notes,Long> {
 
 }
