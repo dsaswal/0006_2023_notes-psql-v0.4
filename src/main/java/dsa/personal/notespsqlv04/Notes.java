@@ -1,8 +1,12 @@
 package dsa.personal.notespsqlv04;
 
+import 
+
+@Entity
 public class Notes {
 	
-	private long id;
+	@Id
+    private long id;
 	private String title;
 	private String note;
 	private long timestamp;
