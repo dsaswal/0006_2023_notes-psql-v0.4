@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Version;
+import jakarta.persistence.PrePersist;
 import java.sql.Timestamp;
 
 @Entity
@@ -12,7 +13,7 @@ public class Notes {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    	private long id;
 	private String title;
 	private String note;
 	private Timestamp timestamp;
@@ -22,20 +23,31 @@ public class Notes {
 	public Notes() {
 	}
 	
-	public Notes(long id, String title, String note, Timestamp timestamp) {
+	public Notes(String title, String note) {
 		super();
-		this.id = id;
 		this.title = title;
 		this.note = note;
-		this.timestamp = timestamp;
 	}
 
+    	@PrePersist
+    	protected void onCreate() {
+        	timestamp = new Timestamp(System.currentTimeMillis());
+    	}
+	
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 	public String getTitle() {
