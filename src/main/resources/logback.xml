@@ -4,7 +4,7 @@
             <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
-    <appender name="ROOTFILE" class="ch.qos.logback.core.FileAppender">
+    <appender name="root_file" class="ch.qos.logback.core.FileAppender">
         <file>logs/root.log</file>
         <encoder>
             <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
@@ -17,9 +17,9 @@
         </encoder>
     </appender>
     <logger name="logging.level.org.hibernate" level="DEBUG">
-        <appender-ref ref="FILE" />
+        <appender-ref ref="hibernate_file" />
     </logger>
     <root level="debug">
-        <appender-ref ref="ROOTFILE" />
-    </root>    
+        <appender-ref ref="root_file" />
+    </root>
 </configuration>
