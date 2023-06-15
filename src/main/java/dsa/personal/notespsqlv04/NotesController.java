@@ -1,6 +1,8 @@
 package dsa.personal.notespsqlv04;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -40,7 +42,7 @@ public class NotesController {
     }
 
     @GetMapping("/notes/{id}")
-    public Notes getNote(@PathVariable long id) {
+    public Optional<Notes> getNote(@PathVariable long id) {
         return notesService.getNotes(id);
     }
 
