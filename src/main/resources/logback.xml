@@ -1,5 +1,5 @@
 <configuration>
-    <property name="log.dir" value="%HOME/logs/notes-psql-v04" />
+    <property name="log.dir" value="$HOME/logs/notes-psql-v04" />
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
