@@ -22,4 +22,8 @@ public class NotesService {
         notesRepository.save(note);
     }
 
+    public Notes getNotes(long id) {
+        return notesRepository.findById(id);
+    }
+
 }

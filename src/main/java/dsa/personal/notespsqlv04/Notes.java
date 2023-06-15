@@ -13,7 +13,7 @@ public class Notes {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    	private long id;
+    private long id;
 	private String title;
 	private String note;
 	private Timestamp timestamp;
