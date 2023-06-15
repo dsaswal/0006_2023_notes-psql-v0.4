@@ -1,7 +1,5 @@
 package dsa.personal.notespsqlv04;
 
-import java.sql.Timestamp;
-
 public class ErrorResponse {
     private int statusCode;
     private String message;

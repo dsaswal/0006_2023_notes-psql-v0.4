@@ -23,6 +23,10 @@ public class NotesService {
         notesRepository.save(note);
     }
 
+    public void deleteNote(Long id) {
+        notesRepository.deleteById(id);
+    }
+
     public Optional<Notes> getNotes(Long id) {
         return notesRepository.findById(id);
     }
