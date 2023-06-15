@@ -1,17 +1,19 @@
 <configuration>
+    <property name="log.dir" value="%HOME/logs/notes-psql-v04" />
+
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
     <appender name="root_file" class="ch.qos.logback.core.FileAppender">
-        <file>~/logs/notes-psql-v04/root.log</file>
+        <file>${log.dir}/root.log</file>
         <encoder>
             <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
     <appender name="hibernate_file" class="ch.qos.logback.core.FileAppender">
-        <file>~/logs/notes-psql-v04/hibernate.log</file>
+        <file>${log.dir}/hibernate.log</file>
         <encoder>
             <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
