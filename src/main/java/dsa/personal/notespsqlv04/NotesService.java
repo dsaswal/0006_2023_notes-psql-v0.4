@@ -2,6 +2,7 @@ package dsa.personal.notespsqlv04;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class NotesService {
         notesRepository.save(note);
     }
 
-    public Notes getNotes(long id) {
+    public Optional<Notes> getNotes(Long id) {
         return notesRepository.findById(id);
     }
 
