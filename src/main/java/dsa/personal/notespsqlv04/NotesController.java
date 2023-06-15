@@ -59,8 +59,8 @@ public class NotesController {
     }
 
     @GetMapping("/error")
-    public void errorMsg() {
+    public void errorMsg() throws Exception {
         logger.debug("Manchmal schlecht");
-        new Exception("BAD_REQUEST");
+        throw new Exception("BAD_REQUEST");
     }
 }

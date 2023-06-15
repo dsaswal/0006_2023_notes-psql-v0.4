@@ -11,6 +11,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> defaultExceptionHandler(Exception ex) {
         ErrorResponse error = new ErrorResponse();
         error.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        error.setErrorHash(ex.hashCode());
         error.setMessage(ex.getMessage());
         error.setTimestamp(System.currentTimeMillis());
         return new ResponseEntity<ErrorResponse>(error, null, HttpStatus.BAD_REQUEST);

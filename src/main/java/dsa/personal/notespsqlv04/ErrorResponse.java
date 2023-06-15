@@ -2,6 +2,7 @@ package dsa.personal.notespsqlv04;
 
 public class ErrorResponse {
     private int statusCode;
+    private int errorHash;
     private String message;
     private long timestamp;
 
@@ -11,6 +12,12 @@ public class ErrorResponse {
     public void setStatusCode(int statusCode) {
         this.statusCode = statusCode;
     }
+    public int getErrorHash() {
+        return errorHash;
+    }
+    public void setErrorHash(int errorHash) {
+        this.errorHash = errorHash;
+    }    
     public String getMessage() {
         return message;
     }
@@ -23,8 +30,9 @@ public class ErrorResponse {
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
-    public ErrorResponse(int statusCode, String message, long timestamp) {
+    public ErrorResponse(int statusCode, int errorHash, String message, long timestamp) {
         this.statusCode = statusCode;
+        this.errorHash = errorHash;
         this.message = message;
         this.timestamp = timestamp;
     }
@@ -32,7 +40,7 @@ public class ErrorResponse {
     }
     @Override
     public String toString() {
-        return "ErrorResponse [statusCode=" + statusCode + ", message=" + message + ", timestamp=" + timestamp + "]";
+        return "ErrorResponse [statusCode=" + statusCode + ", errorHash=\" + errorHash + \", message=" + message + ", timestamp=" + timestamp + "]";
     }
     
 }
