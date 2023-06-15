@@ -53,8 +53,8 @@ public class NotesController {
     }
 
     @GetMapping("/error")
-    public String errorMsg() {
+    public void errorMsg() {
         logger.debug("This is a debug statement");
-        return "Ciao!";
+        new Exception("BAD_REQUEST");
     }
 }
