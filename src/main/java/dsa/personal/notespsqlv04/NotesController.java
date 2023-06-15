@@ -48,7 +48,7 @@ public class NotesController {
 
     @GetMapping("/ping")
     public String greet() {
-        logger.debug("This is a debug statement");
+        logger.debug("Grüezi, freut mich");
         return "Ciao!";
     }
 
