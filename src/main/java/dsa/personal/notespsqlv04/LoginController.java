@@ -12,6 +12,12 @@ public class LoginController {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
+    @GetMapping("/")
+    public String homePage() throws Exception {
+        logger.debug("redirecting to home page");
+        return "home";
+    }
+
     @GetMapping("/loginPage")
     public String loginPage() throws Exception {
         logger.debug("redirecting to login page");
