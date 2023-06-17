@@ -57,10 +57,4 @@ public class NotesController {
         logger.debug("Grüezi, freut mich");
         return "Ciao!";
     }
-
-    @GetMapping("/error")
-    public void errorMsg() throws Exception {
-        logger.debug("Manchmal schlecht");
-        throw new Exception("BAD_REQUEST");
-    }
 }
