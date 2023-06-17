@@ -12,8 +12,8 @@ public class LoginController {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-    @GetMapping("/login")
-    public String showLoginPage() throws Exception {
+    @GetMapping("/loginPage")
+    public String loginPage() throws Exception {
         logger.debug("redirecting to login page");
         return "plain-login";
     }
