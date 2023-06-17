@@ -63,4 +63,10 @@ public class NotesController {
         logger.debug("Manchmal schlecht");
         throw new Exception("BAD_REQUEST");
     }
+
+    @GetMapping("/login")
+    public String showLoginPage() throws Exception {
+        logger.debug("redirecting to login page");
+        return "plain-login";
+    }
 }
