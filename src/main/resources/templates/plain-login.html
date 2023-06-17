@@ -3,7 +3,7 @@
     <form action="#" th:action="@{/authenticateTheUser}" method="POST">
         <div th:if="${param.error}"><i>Es tut mir leid, schlecht pass</i></div>
         <div th:if="${param.logout}"><i>Du bist logged out</i></div>
-        <p>User: <span sec:authentication="principal.username"/><br/>User: <span sec:authentication="principal.authorities"/></p>
+        <p>User: <span sec:authentication="principal.username"/><br/>Roles: <span sec:authentication="principal.authorities"/></p>
         <p>User name: <input type="text" name="username"/></p>
         <p>Password: <input type="password" name="password"/></p>
         <p><input type="submit" value="Login"/></p>

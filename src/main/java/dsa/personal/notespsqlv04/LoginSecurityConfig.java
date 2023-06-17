@@ -12,7 +12,8 @@ public class LoginSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(configurer -> configurer.anyRequest().authenticated())
         .formLogin(form -> form.loginPage("/loginPage").loginProcessingUrl("/authenticateTheUser").permitAll())
-        .logout(logout -> logout.permitAll());
+        .logout(logout -> logout.permitAll())
+        .exceptionHandling(configurer -> configurer.accessDeniedPage("/access-denied"));
         return http.build();
     }
     
