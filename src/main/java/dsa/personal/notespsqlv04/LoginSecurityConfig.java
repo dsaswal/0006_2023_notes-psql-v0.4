@@ -10,7 +10,9 @@ public class LoginSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(configurer -> configurer.anyRequest().authenticated()).formLogin(form -> form.loginPage("/loginPage").loginProcessingUrl("/authenticateTheUser").permitAll());
+        http.authorizeHttpRequests(configurer -> configurer.anyRequest().authenticated())
+        .formLogin(form -> form.loginPage("/loginPage").loginProcessingUrl("/authenticateTheUser").permitAll())
+        .logout(logout -> logout.permitAll());
         return http.build();
     }
     
