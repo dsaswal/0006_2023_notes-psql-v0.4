@@ -24,6 +24,12 @@ public class LoginController {
         return "plain-login";
     }
     
+    @GetMapping("/error")
+    public String errorPage() throws Exception {
+        logger.debug("redirecting to error page");
+        return "error";
+    }
+
     @GetMapping("/access-denied")
     public String accessDenied() throws Exception {
         logger.debug("redirecting to login page");
