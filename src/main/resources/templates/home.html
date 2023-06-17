@@ -1,9 +1,12 @@
-<html xmlns:th="http://www.thymeleaf.org"><body>
-    <h3>Home Page</h3>
-    <form action="#" th:action="@{/logout}" method="POST">
-        <div th:if="${param.error}"><i>Es tut mir leid, schlecht pass</i></div>
-        <div th:if="${param.logout}"><i>Du bist logged out</i></div>
-        <p>User: <span sec:authentication="principal.username"/><br/>Roles: <span sec:authentication="principal.authorities"/></p>
-        <p><input type="submit" value="Logout"/></p>
-    </form>
-</body></html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <title>Home Page</title>
+    <body>
+        <h3>Home Page</h3>
+        <form action="#" th:action="@{/logout}" method="POST">
+            <div th:if="${param.error}"><i>Es tut mir leid, schlecht pass</i></div>
+            <div th:if="${param.logout}"><i>Du bist logged out</i></div>
+            <p>User: <span sec:authentication="principal.username"/><br/>Roles: <span sec:authentication="principal.authorities"/></p>
+            <p><input type="submit" value="Logout"/></p>
+        </form>
+    </body>
+</html>
