@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role Management - Notes App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .btn {
+            padding: 8px 16px;
+            margin: 4px 2px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-primary {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .btn-danger {
+            background-color: #f44336;
+            color: white;
+        }
+        .btn-edit {
+            background-color: #2196F3;
+            color: white;
+        }
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            margin: 2px;
+            border-radius: 3px;
+            font-size: 12px;
+            background-color: #e0e0e0;
+        }
+        .nav {
+            margin-bottom: 20px;
+        }
+        .nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="/">Home</a>
+            <a href="/admin/roles">Role Management</a>
+            <span sec:authentication="name"></span>
+            <a href="/logout" style="float: right;">Logout</a>
+        </div>
+
+        <h1>Role & Permission Management</h1>
+
+        <!-- Flash Messages -->
+        <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+        <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+
+        <!-- Roles Section -->
+        <h2>Roles</h2>
+        <a href="/admin/roles/create" class="btn btn-primary">Create New Role</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Direct Permissions</th>
+                    <th>Inherited Roles</th>
+                    <th>System Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="role : ${roles}">
+                    <td th:text="${role.id}">1</td>
+                    <td th:text="${role.name}">ADMIN</td>
+                    <td th:text="${role.description}">Administrator</td>
+                    <td>
+                        <span th:each="perm : ${role.permissions}" class="badge" th:text="${perm.name}">PERMISSION</span>
+                    </td>
+                    <td>
+                        <span th:each="childRole : ${role.childRoles}" class="badge" th:text="${childRole.name}">ROLE</span>
+                    </td>
+                    <td th:text="${role.isSystem} ? 'Yes' : 'No'">No</td>
+                    <td>
+                        <a th:href="@{/admin/roles/{id}/edit(id=${role.id})}" class="btn btn-edit">Edit</a>
+                        <form th:if="${!role.isSystem}" th:action="@{/admin/roles/{id}/delete(id=${role.id})}" method="post" style="display: inline;">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Permissions Section -->
+        <h2>Available Permissions</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Resource</th>
+                    <th>Action</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="perm : ${permissions}">
+                    <td th:text="${perm.id}">1</td>
+                    <td th:text="${perm.name}">NOTES:READ</td>
+                    <td th:text="${perm.resource}">NOTES</td>
+                    <td th:text="${perm.action}">READ</td>
+                    <td th:text="${perm.description}">Read notes</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- User Role Assignments -->
+        <h2>User Role Assignments</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Email</th>
+                    <th>Assigned Roles</th>
+                    <th>Enabled</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.username}">admin</td>
+                    <td th:text="${user.email}">admin@example.com</td>
+                    <td>
+                        <span th:each="role : ${user.roles}" class="badge" th:text="${role.name}">ROLE</span>
+                    </td>
+                    <td th:text="${user.enabled} ? 'Yes' : 'No'">Yes</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
