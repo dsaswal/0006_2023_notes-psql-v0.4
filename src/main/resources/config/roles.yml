@@ -1,0 +1,65 @@
+# Role Configuration
+# Roles can have direct permissions and/or inherit from other roles
+# Role composition: SENIOR_ANALYST = ANALYST + AUDITOR + additional permissions
+
+roles:
+  # Basic viewer role - read-only access
+  - name: VIEWER
+    description: "Read-only access to notes"
+    permissions:
+      - NOTES:READ
+
+  # Standard user role - can create and modify own notes
+  - name: USER
+    description: "Standard user with basic note management"
+    permissions:
+      - NOTES:READ
+      - NOTES:CREATE
+      - NOTES:MODIFY
+
+  # Editor role - can delete notes
+  - name: EDITOR
+    description: "Editor with full note management"
+    inherits:
+      - USER
+    additionalPermissions:
+      - NOTES:DELETE
+
+  # Auditor role - can view audit logs
+  - name: AUDITOR
+    description: "Audit and compliance role"
+    permissions:
+      - NOTES:READ
+      - AUDIT:VIEW
+
+  # Manager role - user management capabilities
+  - name: MANAGER
+    description: "Manager with user oversight"
+    inherits:
+      - EDITOR
+    additionalPermissions:
+      - USER:READ
+      - USER:MODIFY
+
+  # Security Officer - enhanced auditing
+  - name: SECURITY_OFFICER
+    description: "Security and compliance officer"
+    inherits:
+      - AUDITOR
+    additionalPermissions:
+      - AUDIT:EXPORT
+      - USER:READ
+
+  # Role Admin - can manage roles and permissions
+  - name: ROLE_ADMIN
+    description: "Role and permission administrator"
+    permissions:
+      - ROLE:READ
+      - ROLE:MANAGE
+      - USER:READ
+
+  # System Admin - full access
+  - name: ADMIN
+    description: "System administrator with full access"
+    permissions:
+      - "*:*"

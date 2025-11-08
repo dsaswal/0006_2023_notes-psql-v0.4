@@ -1,0 +1,80 @@
+# Permission Configuration
+# Format: RESOURCE:ACTION
+# Each permission defines an atomic action that can be performed on a resource
+
+permissions:
+  # Notes permissions
+  - name: NOTES:READ
+    resource: NOTES
+    action: READ
+    description: "View notes"
+
+  - name: NOTES:CREATE
+    resource: NOTES
+    action: CREATE
+    description: "Create new notes"
+
+  - name: NOTES:MODIFY
+    resource: NOTES
+    action: MODIFY
+    description: "Modify existing notes"
+
+  - name: NOTES:DELETE
+    resource: NOTES
+    action: DELETE
+    description: "Delete notes"
+
+  # User management permissions
+  - name: USER:READ
+    resource: USER
+    action: READ
+    description: "View user information"
+
+  - name: USER:CREATE
+    resource: USER
+    action: CREATE
+    description: "Create new users"
+
+  - name: USER:MODIFY
+    resource: USER
+    action: MODIFY
+    description: "Modify user information"
+
+  - name: USER:DELETE
+    resource: USER
+    action: DELETE
+    description: "Delete users"
+
+  # Role management permissions
+  - name: ROLE:READ
+    resource: ROLE
+    action: READ
+    description: "View roles and permissions"
+
+  - name: ROLE:MANAGE
+    resource: ROLE
+    action: MANAGE
+    description: "Create, modify, and delete roles"
+
+  # Audit permissions
+  - name: AUDIT:VIEW
+    resource: AUDIT
+    action: VIEW
+    description: "View audit logs"
+
+  - name: AUDIT:EXPORT
+    resource: AUDIT
+    action: EXPORT
+    description: "Export audit logs"
+
+  # System administration
+  - name: SYSTEM:ADMIN
+    resource: SYSTEM
+    action: ADMIN
+    description: "Full system administration access"
+
+  # Wildcard permission for superadmin
+  - name: "*:*"
+    resource: "*"
+    action: "*"
+    description: "All permissions (superadmin)"
