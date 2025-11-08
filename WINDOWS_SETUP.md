@@ -97,17 +97,29 @@ To access the H2 database console (for database administration):
 
 ### Application User Credentials
 
-The application may have pre-configured users (check your security configuration files). Common default credentials might be:
+The application automatically creates the following users on first startup:
 
-- **Admin User:**
+- **Admin User (Full Access):**
   - Username: `admin`
-  - Password: Check `src/main/resources/config/` files or initialization code
+  - Password: `admin123`
+  - Role: ADMIN
 
-- **Regular User:**
-  - Username: `user`
-  - Password: Check `src/main/resources/config/` files or initialization code
+- **Regular User (Read/Write Access):**
+  - Username: `dsa`
+  - Password: `Tiger`
+  - Roles: USER, EDITOR
 
-**Important:** Change these default passwords in a production environment!
+- **Viewer User (Read-Only Access):**
+  - Username: `viewer`
+  - Password: `viewer123`
+  - Role: VIEWER
+
+- **Auditor User (Audit Access):**
+  - Username: `auditor`
+  - Password: `auditor123`
+  - Roles: AUDITOR, SECURITY_OFFICER
+
+**Important:** These are default development credentials. Change them in a production environment!
 
 ## Database Storage Location
 
@@ -160,6 +172,55 @@ Either:
 **Solution:**
 - Make sure only one instance of the application is running
 - If the error persists, delete the `data` folder and restart
+
+### Issue: "Process terminated with exit code: 1" or Application fails to start
+
+**Solution:**
+This error can have multiple causes. Check the console output or logs for the actual error message:
+
+1. **Missing config files:**
+   - Ensure `src/main/resources/config/permissions.yml` exists
+   - Ensure `src/main/resources/config/roles.yml` exists
+   - These files are required for the RBAC system
+
+2. **Build not complete:**
+   ```cmd
+   mvn clean package -DskipTests
+   ```
+
+3. **Check for detailed error:**
+   ```cmd
+   mvn spring-boot:run
+   ```
+   Look at the full console output to see the actual error message
+
+4. **Run the JAR directly for clearer output:**
+   ```cmd
+   java -jar target\notes-psql-v0.4-0.0.1-SNAPSHOT.jar
+   ```
+
+5. **Common causes:**
+   - Port 8080 already in use (see Port troubleshooting above)
+   - Missing or corrupt dependencies (run `mvn clean install`)
+   - Insufficient disk space for database file
+   - Missing write permissions in project directory
+
+6. **Check application logs:**
+   - Look for error messages in the console output
+   - Check for `ERROR` or `FATAL` level log messages
+   - The first error message usually indicates the root cause
+
+7. **Fresh start:**
+   ```cmd
+   # Delete build artifacts and database
+   rmdir /s /q target data
+
+   # Rebuild
+   mvn clean package -DskipTests
+
+   # Run again
+   java -jar target\notes-psql-v0.4-0.0.1-SNAPSHOT.jar
+   ```
 
 ## Running as Windows Service (Optional)
 
